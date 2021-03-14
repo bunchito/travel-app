@@ -1,15 +1,14 @@
-const dotenv = require('dotenv');
-dotenv.config()
-const path = require('path')
-const express = require('express')
-var bodyParser = require('body-parser')
-var cors = require('cors')
-const fetch = require('node-fetch')
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
 const port = 8085
 
-// const baseURL = 'https://api.meaningcloud.com/sentiment-2.1'
-// const apiKey = process.env.API_KEY
-// const lang = 'en'
+import { validateResponse } from './validations/index'
+
+import { geoAPI, geoGetCityInfo, parsedGeoGetCityInfo } from './API/geonames'
+import { weatherAPI, weatherGetCity, parsedWeatherGetCity } from './API/weatherbit'
+import { pixaAPI, pixaGetCityImage, parsedPixaGetCityImage } from './API/pixabay'
+
 
 const app = express()
 
@@ -29,6 +28,41 @@ app.get('/', function (req, res) {
   } else {
     res.sendFile('dist/index.html')
   }
+})
+
+app.post('/api', async function (req, res) {
+  const data = '{ "msg": "Main endpoint!" }'
+  res.send(data)
+})
+
+app.post('/api/travels', async function (req, res) {
+  const { city, dates } = req.body
+
+  const geoData = await geoGetCityInfo(geoAPI, city)
+  const cityValidation = validateResponse(geoData, 'totalResultsCount')
+  if (cityValidation === false) {
+    res.send({ "error": {
+      "type": "city",
+      "msg": "We do not have that city in our records!"
+    } })
+    return
+  }
+
+  const geoDataParsed = parsedGeoGetCityInfo(geoData)
+
+  const weatherData = await weatherGetCity(weatherAPI, geoDataParsed, dates)
+  const weatherDataParsed = parsedWeatherGetCity(weatherData)
+
+  const pixaData = await pixaGetCityImage(pixaAPI, city)
+  const pixaDataParsed = parsedPixaGetCityImage(pixaData)
+
+  const response = {
+    city: geoDataParsed,
+    weather: weatherDataParsed,
+    photos: pixaDataParsed
+  }
+
+  res.send(response)
 })
 
 app.get('/test', function (req, res) {
