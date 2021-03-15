@@ -13,8 +13,4 @@ const warningForMaxDaysForecastAPI = (days) => {
   return days > 16 ? { warning: 'We only support forecast for 16 days' } : null
 }
 
-export {
-  validatePropertiesObj,
-  validateResponse,
-  warningForMaxDaysForecastAPI
-}
+export { validatePropertiesObj, validateResponse, warningForMaxDaysForecastAPI }

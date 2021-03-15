@@ -7,14 +7,19 @@ const weatherAPI = {
   apiKey: process.env.WEATHERBIT_API_KEY
 }
 
-const getRequest = async (weatherAPIconfigurationObject, api, requiredProperties, objectProperties, cityObject, extraParams) => {
-  
+const getRequest = async (
+  weatherAPIconfigurationObject,
+  api,
+  requiredProperties,
+  objectProperties,
+  cityObject,
+  extraParams
+) => {
   const { baseURL, apiKey } = weatherAPIconfigurationObject
-  const { lng,  lat } = cityObject
+  const { lng, lat } = cityObject
 
   try {
-
-    if(!validatePropertiesObj(requiredProperties, objectProperties)) {
+    if (!validatePropertiesObj(requiredProperties, objectProperties)) {
       throw 'Properties validation error'
     }
 
@@ -23,11 +28,11 @@ const getRequest = async (weatherAPIconfigurationObject, api, requiredProperties
 
     const req = await fetch(builtURL)
     const res = await req.json()
-    
+
     return res
-  } catch(err) {
-      console.log(`ERROR: weatherGetCity - ${err}`)
-      return err
+  } catch (err) {
+    console.log(`ERROR: weatherGetCity - ${err}`)
+    return err
   }
 }
 
@@ -40,10 +45,17 @@ const weatherGetCity = async (weatherAPIBaseObject, cityObj, dates) => {
 
   const requiredProperties = ['baseURL', 'apiKey']
 
-  const currentWeather =  await getRequest(weatherAPI, 'current', requiredProperties, weatherAPIBaseObject, cityObj)
+  const currentWeather = await getRequest(weatherAPI, 'current', requiredProperties, weatherAPIBaseObject, cityObj)
 
   const extraParameters = `&days=${days}`
-  const forecastWeather =  await getRequest(weatherAPI, 'forecast', requiredProperties, weatherAPIBaseObject, cityObj, extraParameters)
+  const forecastWeather = await getRequest(
+    weatherAPI,
+    'forecast',
+    requiredProperties,
+    weatherAPIBaseObject,
+    cityObj,
+    extraParameters
+  )
 
   const weatherObj = {
     current: currentWeather,
@@ -74,8 +86,4 @@ const parsedWeatherGetCity = (apiResponse = {}) => {
   }
 }
 
-export {
-  weatherAPI,
-  weatherGetCity,
-  parsedWeatherGetCity
-}
+export { weatherAPI, weatherGetCity, parsedWeatherGetCity }

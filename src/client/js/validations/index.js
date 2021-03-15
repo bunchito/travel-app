@@ -14,7 +14,4 @@ const shouldNotBeEmpty = (userInput = {}) => {
   return emptyInputs
 }
 
-export {
-  validateData,
-  shouldNotBeEmpty
-}
+export { validateData, shouldNotBeEmpty }

@@ -56,7 +56,7 @@ const markupInfoWrapper = (city, photos, weather) => {
   markup += markupWeather(weather.currentMin, city.name)
   markup += `</div>`
   markup += `</div>`
-  markup += `<h2>Forecast</h2>`
+  markup += `<h3>Forecast</h3>`
   markup += `${weather.days.warning ? weather.days.warning : ''}`
   markup += `${markupWeatherForecast(weather.forecastMin)}`
   return markup
@@ -69,7 +69,7 @@ const addMarkup = (element = {}, markup = '', childElement = {}) => {
   const childElementToremove = document.getElementById(childElement.id)
 
   const selectedElement = document.querySelector(`${elementType}${elementText}`)
-  if(childElementToremove) {
+  if (childElementToremove) {
     selectedElement.getElementsByClassName.display = 'none'
     selectedElement.removeChild(childElementToremove)
     selectedElement.getElementsByClassName.display = 'block'
@@ -79,7 +79,4 @@ const addMarkup = (element = {}, markup = '', childElement = {}) => {
   return
 }
 
-export {
-  generateMarkup,
-  addMarkup
-}
+export { generateMarkup, addMarkup }

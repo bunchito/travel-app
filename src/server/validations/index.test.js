@@ -1,8 +1,6 @@
-import {
-  validatePropertiesObj
-} from "./index"
+import { validatePropertiesObj } from './index'
 
-describe('Testing validatePropertiesObj()' , () => {
+describe('Testing validatePropertiesObj()', () => {
   test('given an array with properties and an object should return true if all properties are present as keys', () => {
     const properties = ['a', 'b', 'c']
     const obj = {
@@ -12,6 +10,6 @@ describe('Testing validatePropertiesObj()' , () => {
       d: 4
     }
     const result = true
-    expect(validatePropertiesObj(properties,obj)).toEqual(result)
-  });
-});
+    expect(validatePropertiesObj(properties, obj)).toEqual(result)
+  })
+})

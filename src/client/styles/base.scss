@@ -6,6 +6,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
 main {
   flex: 2;
 }
@@ -43,12 +54,20 @@ section {
 .travel-city .container {
   display: flex;
   align-items: center;
+  padding: 0 5px;
 }
 
 .travel-city img {
   width: 40px;
 }
 
+.travel-city h2 {
+  padding: 10px;
+}
+
+.travel-info + h3 {
+  margin-top: 10px;
+}
 
 .travel-forecast {
   padding: 0;

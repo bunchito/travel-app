@@ -1,6 +1,6 @@
 import { validateData } from '../validations/index'
 
-const postDataToBackend = async (url,data) => {
+const postDataToBackend = async (url, data) => {
   validateData('object', data)
 
   try {
@@ -8,15 +8,15 @@ const postDataToBackend = async (url,data) => {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    });
-    const response = await req.json();
-    return response;
+    })
+    const response = await req.json()
+    return response
   } catch (err) {
-    console.log(`postDataToBackend error: ${err}`);
-    return null;
+    console.log(`postDataToBackend error: ${err}`)
+    return null
   }
 }
 

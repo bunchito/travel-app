@@ -16,16 +16,19 @@ const onClickHandler = async () => {
   const toDate = document.querySelector('input[id="to-date"]').value
 
   const inputsMapping = {
-    'Destination': toPlace,
+    Destination: toPlace,
     'Departure date': fromPlace,
     'Arrival date': toDate
   }
-  const emptyInputs  = shouldNotBeEmpty(inputsMapping)
-  if(emptyInputs !== 0) return;
-
-  const data = await postDataToBackend('http://localhost:8085/api/travels', { city: toPlace, dates: { fromDate, toDate } })
-  if(data.error) {
-   return cityErrorHandler(data.error)
+  const emptyInputs = shouldNotBeEmpty(inputsMapping)
+  if (emptyInputs !== 0) return
+  console.log(fromDate, toDate)
+  const data = await postDataToBackend('http://localhost:8085/api/travels', {
+    city: toPlace,
+    dates: { fromDate, toDate }
+  })
+  if (data.error) {
+    return cityErrorHandler(data.error)
   }
 
   const markup = generateMarkup(childElement, data)
@@ -36,7 +39,4 @@ const cityErrorHandler = (err) => {
   if (err.type === 'city') alert(err.msg)
 }
 
-export {
-  onClickHandler,
-  cityErrorHandler
-}
+export { onClickHandler, cityErrorHandler }

@@ -9,16 +9,17 @@ import { geoAPI, geoGetCityInfo, parsedGeoGetCityInfo } from './API/geonames'
 import { weatherAPI, weatherGetCity, parsedWeatherGetCity } from './API/weatherbit'
 import { pixaAPI, pixaGetCityImage, parsedPixaGetCityImage } from './API/pixabay'
 
-
 const app = express()
 
 app.use(cors())
 
 app.use(bodyParser.json())
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+)
 
 app.use(express.static('dist'))
 
@@ -41,10 +42,12 @@ app.post('/api/travels', async function (req, res) {
   const geoData = await geoGetCityInfo(geoAPI, city)
   const cityValidation = validateResponse(geoData, 'totalResultsCount')
   if (cityValidation === false) {
-    res.send({ "error": {
-      "type": "city",
-      "msg": "We do not have that city in our records!"
-    } })
+    res.send({
+      error: {
+        type: 'city',
+        msg: 'We do not have that city in our records!'
+      }
+    })
     return
   }
 

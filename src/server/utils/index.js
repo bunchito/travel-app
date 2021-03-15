@@ -11,8 +11,5 @@ const getDiffDatesInDays = (datesObj = {}) => {
   const differenceIndays = Math.round(difference / (1000 * 3600 * 24))
   return differenceIndays
 }
- 
-export {
-  formatLongDateToISO,
-  getDiffDatesInDays
-}
+
+export { formatLongDateToISO, getDiffDatesInDays }

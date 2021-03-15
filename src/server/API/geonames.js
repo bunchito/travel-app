@@ -11,14 +11,12 @@ const geoAPI = {
 }
 
 const geoGetCityInfo = async (geoAPIBaseObject, city) => {
-
   const { baseURL, apiKey, maxRows } = geoAPI
 
   try {
-
     const requiredProperties = ['baseURL', 'apiKey', 'maxRows']
 
-    if(!validatePropertiesObj(requiredProperties, geoAPIBaseObject)) {
+    if (!validatePropertiesObj(requiredProperties, geoAPIBaseObject)) {
       throw 'Properties validation error'
     }
 
@@ -27,9 +25,9 @@ const geoGetCityInfo = async (geoAPIBaseObject, city) => {
     const res = await req.json()
 
     return res
-  } catch(err) {
-      console.log(`ERROR: geoGetCityInfo - ${err}`)
-      return err
+  } catch (err) {
+    console.log(`ERROR: geoGetCityInfo - ${err}`)
+    return err
   }
 }
 
@@ -48,8 +46,4 @@ const parsedGeoGetCityInfo = (apiResponse = {}) => {
   return parsedData[0]
 }
 
-export {
-  geoAPI,
-  geoGetCityInfo,
-  parsedGeoGetCityInfo
-}
+export { geoAPI, geoGetCityInfo, parsedGeoGetCityInfo }

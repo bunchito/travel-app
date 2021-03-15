@@ -7,14 +7,12 @@ const pixaAPI = {
 }
 
 const pixaGetCityImage = async (pixaAPIBaseObject, city) => {
-
   const { baseURL, apiKey } = pixaAPI
 
   try {
-
     const requiredProperties = ['baseURL', 'apiKey']
 
-    if(!validatePropertiesObj(requiredProperties, pixaAPIBaseObject)) {
+    if (!validatePropertiesObj(requiredProperties, pixaAPIBaseObject)) {
       throw 'Properties validation error'
     }
 
@@ -22,9 +20,9 @@ const pixaGetCityImage = async (pixaAPIBaseObject, city) => {
     const req = await fetch(builtURL)
     const res = await req.json()
     return res
-  } catch(err) {
-      console.log(`ERROR: pixaGetCityImage - ${err}`)
-      return err
+  } catch (err) {
+    console.log(`ERROR: pixaGetCityImage - ${err}`)
+    return err
   }
 }
 
@@ -42,8 +40,4 @@ const parsedPixaGetCityImage = (apiResponse = {}) => {
   return parsedData
 }
 
-export {
-  pixaAPI,
-  pixaGetCityImage,
-  parsedPixaGetCityImage
-}
+export { pixaAPI, pixaGetCityImage, parsedPixaGetCityImage }
